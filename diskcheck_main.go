@@ -39,11 +39,15 @@ func main() {
 //==========================================================================
 // support functions
 
+func isDir(path string) bool {
+	info, _ := os.Stat(path)
+	return info.IsDir()
+}
+
 func debug(input string, threshold int) {
 	if !(Opts.Debug >= threshold) {
 		return
 	}
-	print("] ")
 	print(input)
 	print("\n")
 }

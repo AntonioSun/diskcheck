@@ -27,6 +27,18 @@ Options:
     Usage: spare the last amount of GB from filling up
     Value: 2
 
+  - Name: DataPoints
+    Type: int
+    Flag: p
+    Value: 100
+    Usage: number of data points for speed measurement
+
+  - Name: KbSpeed
+    Type: bool
+    Flag: k
+    Value: false
+    Usage: use KB/s to measure speed
+
   - Name: Debug
     Type: int
     Flag: d
@@ -36,7 +48,7 @@ Options:
   - Name: Help
     Type: bool
     Flag: h
-    Usage: show usage help
+    Usage: show this usage help
     Value: false
 
 UsageEnd: |
@@ -45,5 +57,5 @@ UsageEnd: |
   the 'writable_path', and leave the last 'spare' amount of GB
   free for normal operation.
   
-  The '-sp' flag can be overridden by environment variable(s)
-  'DISKCHECK_SP'
+  The '-sp','-p' flags can be overridden by environment variables
+  'DISKCHECK_SP','DISKCHECK_P', etc
