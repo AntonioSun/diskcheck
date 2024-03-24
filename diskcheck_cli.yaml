@@ -33,6 +33,12 @@ Options:
     Value: 100
     Usage: number of data points for speed measurement
 
+  - Name: Wait
+    Type: int
+    Flag: w
+    Value: 121
+    Usage: wait time after write before read, in seconds
+
   - Name: KbSpeed
     Type: bool
     Flag: k

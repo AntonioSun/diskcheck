@@ -20,6 +20,7 @@ const progname = "diskcheck" // os.Args[0]
 type Options struct {
 	Spare      int  // spare the last amount of GB from filling up
 	DataPoints int  // number of data points for speed measurement
+	Wait       int  // wait time after write before read, in seconds
 	KbSpeed    bool // use KB/s to measure speed
 	Debug      int  // debugging level
 	Help       bool // show this usage help
@@ -41,6 +42,8 @@ func initVars() {
 		"spare the last amount of GB from filling up")
 	flag.IntVar(&Opts.DataPoints, "p", 100,
 		"number of data points for speed measurement")
+	flag.IntVar(&Opts.Wait, "w", 121,
+		"wait time after write before read, in seconds")
 	flag.BoolVar(&Opts.KbSpeed, "k", false,
 		"use KB/s to measure speed")
 	flag.IntVar(&Opts.Debug, "d", 0,
@@ -64,6 +67,12 @@ func initVals() {
 			Opts.DataPoints = i
 		}
 	}
+	if Opts.Wait == 0 &&
+		len(os.Getenv("DISKCHECK_W")) != 0 {
+		if i, err := strconv.Atoi(os.Getenv("DISKCHECK_W")); err == nil {
+			Opts.Wait = i
+		}
+	}
 	if _, exists = os.LookupEnv("DISKCHECK_K"); Opts.KbSpeed || exists {
 		Opts.KbSpeed = true
 	}
@@ -79,7 +88,7 @@ func initVals() {
 
 }
 
-const usageSummary = "  -sp\tspare the last amount of GB from filling up (DISKCHECK_SP)\n  -p\tnumber of data points for speed measurement (DISKCHECK_P)\n  -k\tuse KB/s to measure speed (DISKCHECK_K)\n  -d\tdebugging level (DISKCHECK_D)\n  -h\tshow this usage help (DISKCHECK_H)\n\nDetails:\n\n"
+const usageSummary = "  -sp\tspare the last amount of GB from filling up (DISKCHECK_SP)\n  -p\tnumber of data points for speed measurement (DISKCHECK_P)\n  -w\twait time after write before read, in seconds (DISKCHECK_W)\n  -k\tuse KB/s to measure speed (DISKCHECK_K)\n  -d\tdebugging level (DISKCHECK_D)\n  -h\tshow this usage help (DISKCHECK_H)\n\nDetails:\n\n"
 
 // Usage function shows help on commandline usage
 func Usage() {
