@@ -109,7 +109,7 @@ The '-sp','-p' flags can be overridden by environment variables
 Usage Examples (say disk avail is 267GB):
   diskcheck -sp 203 /tmp # 64GB write
   diskcheck -sp 139 -p 200 /tmp # 128GB write
-  ... # 25GB write with -p 400
+  ... # 256GB write with -p 400
 
   or,
 
