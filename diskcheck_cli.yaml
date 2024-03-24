@@ -59,3 +59,12 @@ UsageEnd: |
   
   The '-sp','-p' flags can be overridden by environment variables
   'DISKCHECK_SP','DISKCHECK_P', etc
+
+  Usage Examples (say disk avail is 267GB):
+    diskcheck -sp 203 /tmp # 64GB write
+    diskcheck -sp 139 -p 200 /tmp # 128GB write
+    ... # 25GB write with -p 400
+
+    or,
+
+    DISKCHECK_SP=139 DISKCHECK_P=200 diskcheck /tmp

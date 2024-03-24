@@ -22,7 +22,7 @@ type Options struct {
 	DataPoints int  // number of data points for speed measurement
 	KbSpeed    bool // use KB/s to measure speed
 	Debug      int  // debugging level
-	Help       bool // show usage help
+	Help       bool // show this usage help
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ func initVars() {
 	flag.IntVar(&Opts.Debug, "d", 0,
 		"debugging level")
 	flag.BoolVar(&Opts.Help, "h", false,
-		"show usage help")
+		"show this usage help")
 }
 
 func initVals() {
@@ -79,7 +79,7 @@ func initVals() {
 
 }
 
-const usageSummary = "  -sp\tspare the last amount of GB from filling up (DISKCHECK_SP)\n  -p\tnumber of data points for speed measurement (DISKCHECK_P)\n  -k\tuse KB/s to measure speed (DISKCHECK_K)\n  -d\tdebugging level (DISKCHECK_D)\n  -h\tshow usage help (DISKCHECK_H)\n\nDetails:\n\n"
+const usageSummary = "  -sp\tspare the last amount of GB from filling up (DISKCHECK_SP)\n  -p\tnumber of data points for speed measurement (DISKCHECK_P)\n  -k\tuse KB/s to measure speed (DISKCHECK_K)\n  -d\tdebugging level (DISKCHECK_D)\n  -h\tshow this usage help (DISKCHECK_H)\n\nDetails:\n\n"
 
 // Usage function shows help on commandline usage
 func Usage() {
@@ -96,6 +96,15 @@ free for normal operation.
 
 The '-sp','-p' flags can be overridden by environment variables
 'DISKCHECK_SP','DISKCHECK_P', etc
+
+Usage Examples (say disk avail is 267GB):
+  diskcheck -sp 203 /tmp # 64GB write
+  diskcheck -sp 139 -p 200 /tmp # 128GB write
+  ... # 25GB write with -p 400
+
+  or,
+
+  DISKCHECK_SP=139 DISKCHECK_P=200 diskcheck /tmp
 `)
 	os.Exit(0)
 }
